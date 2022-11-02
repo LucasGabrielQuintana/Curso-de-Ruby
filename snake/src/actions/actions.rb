@@ -33,4 +33,26 @@ module Actions
                 new_position = Model::Coord.new(curr_position.row, curr_position.col - 1)
         end
     end
+    def position_is_valid?(state, position)
+        #verificar que este en la grilla
+        is_invalid = ((position.row >= state.grid.row || position.row < 0) || (position.col >= state.grid.cols || positiion.col < 0))
+
+        return false if is_invalid
+        #verificar que no este superponiendo a la serpiente
+
+        return !(state.snake.positions.include? position)
+    end
+
+    def move_snake_to(state, next_position)
+        #[]
+        #[(1,1)]
+        new_position = [next_position] + state.snake.positiions[0...-1]
+        state.snake.positiion = new_positions
+    end
+
+    def end_game(game)
+        state.game_finished = true
+        state
+    end
+
 end
