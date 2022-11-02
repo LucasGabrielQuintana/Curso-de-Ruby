@@ -1,6 +1,13 @@
 module Model 
+
+    module Direction
+        UP = :up
+        RIGHT = :right
+        DOWN = :down
+        LEFT = :left
+    end
     #Representación del Estado de la aplicación
-    class Coord < Strucu.new(:row, :col)
+    class Coord < Struct.new(:row, :col)
     end
 
     class Food < Coord
@@ -12,7 +19,7 @@ module Model
     class Grid < Struct.new(:rows, :cols)
     end
 
-    class State < Struct.new(:snake, :food, :grid)
+    class State < Struct.new(:snake, :food, :grid, :next_direction)
     end
 
     def self.initial_state
@@ -22,7 +29,8 @@ module Model
                 Model::Coord.new(0,1)]
                 ),
             Model::Food.new(4,4),
-            Model::Grid.new(8,12)
+            Model::Grid.new(8,12),
+            Direction::DOWN
         )
     end
 
