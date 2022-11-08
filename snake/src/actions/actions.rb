@@ -4,7 +4,8 @@ module Actions
         next_position = calc_next_position(state)
         #verifica si es comida la siguiente casilla
         if position_is_food?(state, next_position)
-            grow_snake_to(state, next_position)
+            state = grow_snake_to(state, next_position)
+            generate_food(state)
         # verificar que la siguiente casilla sea valida
         elsif position_is_valid?(state, next_position)
             move_snake_to(state, next_position)
@@ -25,6 +26,13 @@ module Actions
     end
 
     private
+
+    def self.generate_food(state)
+        #rand
+        new_food = Model::Food.new(rand(state.grid.rows), rand(state.grid.cols))
+        state.food = new_food
+        state
+    end
 
     def self.position_is_food?(state, next_position)
         state.food.row == next_position.row && state.food.col == next_position.col
