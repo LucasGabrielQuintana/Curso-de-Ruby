@@ -16,6 +16,11 @@ class App
 
     def init_timer(view)
         loop do
+            if @state.game_finished
+                puts "Juego finalizado"
+                puts "Puntaje: #{@state.snake.positions.length}"
+                break
+            end
             # trigger movement
             @state = Actions::move_snake(@state)
             view.render_game(@state)
